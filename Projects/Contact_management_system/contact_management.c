@@ -28,19 +28,31 @@ int main()
 {
     loadContacts(); // Load contacts from the file at the start
 
-    int choice;
+    int choice; // variable for choosing option
     while (1)
     {
-        // Display menu options
-        printf("\nContact Management System\n");
-        printf("1. Add Contact\n");
-        printf("2. View Contacts\n");
-        printf("3. Edit Contact\n");
-        printf("4. Search Contact\n");
-        printf("5. Delete Contact\n");
-        printf("6. Save Contacts\n");
-        printf("7. Exit\n");
-        printf("Enter your choice: ");
+        printf("\n\n================================================================================\n");
+        printf("                                 CONTACT MANAGEMENT SYSTEM                      \n");
+        printf("================================================================================\n");
+        printf("                                                                                \n");
+        printf("                            (Choose your Action)                                \n");
+        printf("                                                                                \n");
+        printf("================================================================================\n");
+        printf("  1. Add Contact                                                                \n");
+        printf("================================================================================\n");
+        printf("  2. View Contacts                                                              \n");
+        printf("================================================================================\n");
+        printf("  3. Edit Contact                                                               \n");
+        printf("================================================================================\n");
+        printf("  4. Search Contact                                                             \n");
+        printf("================================================================================\n");
+        printf("  5. Delete Contact                                                             \n");
+        printf("================================================================================\n");
+        printf("  6. Save Contacts                                                              \n");
+        printf("================================================================================\n");
+        printf("  7. Exit                                                                       \n");
+        printf("================================================================================\n");
+        printf("\nEnter your choice: ");
         scanf("%d", &choice); // Get user choice
 
         // Perform action based on user choice
@@ -80,6 +92,7 @@ void addContact()
     if (contactCount >= 100)
     {
         printf("Contact list is full!\n");
+        printf("Please try to delete some Contacts\n");
         return;
     }
 
@@ -92,7 +105,13 @@ void addContact()
     scanf(" %[^\n]", contacts[contactCount].email);
 
     contactCount++; // Increment contact count
-    printf("Contact added successfully!\n");
+    printf("\n");
+    printf("*************************************************\n");
+    printf("*                                               *\n");
+    printf("*         Contact Added Successfully!           *\n");
+    printf("*                                               *\n");
+    printf("*************************************************\n");
+    printf("\n");
 }
 
 // Function to view all contacts
@@ -100,18 +119,27 @@ void viewContacts()
 {
     if (contactCount == 0)
     {
-        printf("No contacts to display.\n");
+        printf("\n");
+        printf("*************************************************\n");
+        printf("*                                               *\n");
+        printf("*            No Contacts to Display.            *\n");
+        printf("*                                               *\n");
+        printf("*************************************************\n");
+        printf("\n");
         return;
     }
 
     // Display each contact
     for (int i = 0; i < contactCount; i++)
     {
-        printf("Contact %d\n", i + 1);
-        printf("Name: %s\n", contacts[i].name);
-        printf("Phone: %s\n", contacts[i].phone);
-        printf("Email: %s\n", contacts[i].email);
         printf("\n");
+        printf("=================================================\n");
+        printf("                   Contact %d                    \n", i + 1);
+        printf("=================================================\n");
+        printf(" Name  : %-40s \n", contacts[i].name);
+        printf(" Phone : %-40s \n", contacts[i].phone);
+        printf(" Email : %-40s \n", contacts[i].email);
+        printf("=================================================\n");
     }
 }
 
@@ -125,7 +153,13 @@ void editContact()
 
     if (index < 0 || index >= contactCount)
     {
-        printf("Invalid contact index!\n");
+        printf("\n");
+        printf("*************************************************\n");
+        printf("*                                               *\n");
+        printf("*            Invalid contact index!             *\n");
+        printf("*                                               *\n");
+        printf("*************************************************\n");
+        printf("\n");
         return;
     }
 
@@ -138,7 +172,13 @@ void editContact()
     printf("Enter new email: ");
     scanf(" %[^\n]", contacts[index].email);
 
-    printf("Contact edited successfully!\n");
+    printf("\n");
+    printf("*************************************************\n");
+    printf("*                                               *\n");
+    printf("*            Contact edited successfully!       *\n");
+    printf("*                                               *\n");
+    printf("*************************************************\n");
+    printf("\n");
 }
 
 // Function to search for contacts by name
@@ -153,10 +193,16 @@ void searchContact()
     {
         if (strstr(contacts[i].name, name) != NULL)
         {
-            printf("Contact %d\n", i + 1);
-            printf("Name: %s\n", contacts[i].name);
-            printf("Phone: %s\n", contacts[i].phone);
-            printf("Email: %s\n", contacts[i].email);
+            printf("\n");
+            printf("*************************************************\n");
+            printf("*                                               *\n");
+            printf("*                Contact %d                      *\n", i + 1);
+            printf("*                                               *\n");
+            printf("*************************************************\n");
+            printf("* Name  : %-37s *\n", contacts[i].name);
+            printf("* Phone : %-37s *\n", contacts[i].phone);
+            printf("* Email : %-37s *\n", contacts[i].email);
+            printf("*************************************************\n");
             printf("\n");
         }
     }
@@ -169,10 +215,16 @@ void deleteContact()
     printf("Enter contact index to delete (1-%d): ", contactCount);
     scanf("%d", &index);
     index--;
-
+    // condition
     if (index < 0 || index >= contactCount)
     {
-        printf("Invalid contact index!\n");
+        printf("\n");
+        printf("*************************************************\n");
+        printf("*                                               *\n");
+        printf("*            Invalid contact index!             *\n");
+        printf("*                                               *\n");
+        printf("*************************************************\n");
+        printf("\n");
         return;
     }
 
@@ -183,7 +235,13 @@ void deleteContact()
     }
     contactCount--; // Decrement contact count
 
-    printf("Contact deleted successfully!\n");
+    printf("\n");
+    printf("*************************************************\n");
+    printf("*                                               *\n");
+    printf("*            Contact deleted successfully!      *\n");
+    printf("*                                               *\n");
+    printf("*************************************************\n");
+    printf("\n");
 }
 
 // Function to save contacts to a file
@@ -199,7 +257,27 @@ void saveContacts()
     fwrite(&contactCount, sizeof(int), 1, file);
     fwrite(contacts, sizeof(Contact), contactCount, file);
     fclose(file);
-    printf("Contacts saved successfully!\n");
+
+    if (contactCount == 0)
+    {
+        printf("\n");
+        printf("*************************************************\n");
+        printf("*                                               *\n");
+        printf("*         No contacts to save.                  *\n");
+        printf("*                                               *\n");
+        printf("*************************************************\n");
+        printf("\n");
+    }
+    else
+    {
+        printf("\n");
+        printf("*************************************************\n");
+        printf("*                                               *\n");
+        printf("*         Contacts saved successfully!          *\n");
+        printf("*                                               *\n");
+        printf("*************************************************\n");
+        printf("\n");
+    }
 }
 
 // Function to load contacts from a file
